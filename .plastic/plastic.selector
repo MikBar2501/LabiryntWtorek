@@ -1,0 +1,4 @@
+repository "LabiryntWtorek@Czarnoksieznik@cloud"
+  path "/"
+    br "/main"
+    co "/main"
