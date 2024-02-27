@@ -475,7 +475,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: 396e926a48e20d74583a21498896e013, type: 2}
   m_TargetDisplay: 1
   m_TargetEye: 3
   m_HDR: 1
@@ -550,7 +550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   otherPortal: {fileID: 0}
-  material: {fileID: 0}
+  material: {fileID: 2100000, guid: 9a209e026f54b8f4c8b53382e8aaf50d, type: 2}
   myCamera: {fileID: 2213648808464519715}
   renderSurface: {fileID: 2213648806768401415}
   portalCollider: {fileID: 2213648808582813262}
