@@ -19,6 +19,16 @@ public class GameManager : MonoBehaviour
     public int greenKey = 0;
     public int goldKey = 0;
 
+    AudioSource audioSource;
+
+    public AudioClip resumeClip;
+    public AudioClip pauseClip;
+    public AudioClip winClip;
+    public AudioClip loseClip;
+
+    public MusicScript music;
+    bool lessTime = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +41,7 @@ public class GameManager : MonoBehaviour
         {
             timeToEnd = 100;
         }
-
+        audioSource = GetComponent<AudioSource>();
         InvokeRepeating("Stopper", 2, 1);
 
 
@@ -42,6 +52,23 @@ public class GameManager : MonoBehaviour
     {
         PauseCheck();
         PickUpCheck();
+    }
+
+
+    public void LessTimeOn()
+    {
+        music.PitchThis(1.58f);
+    }
+
+    public void LessTimeOff()
+    {
+        music.PitchThis(1f);
+    }
+
+    public void PlayClip(AudioClip playClip)
+    {
+        audioSource.clip = playClip;
+        audioSource.Play();
     }
 
     void Stopper()
@@ -59,11 +86,25 @@ public class GameManager : MonoBehaviour
         {
             EndGame();
         }
-   
+
+        if(timeToEnd < 20 && !lessTime)
+        {
+            LessTimeOn();
+            lessTime = true;
+        }
+
+        if (timeToEnd > 20 && lessTime)
+        {
+            LessTimeOff();
+            lessTime = false;
+        }
+
+
     }
 
     public void PauseGame()
     {
+        PlayClip(pauseClip);
         Debug.Log("Pause Game");
         Time.timeScale = 0f;
         gamePause = true;
@@ -71,6 +112,7 @@ public class GameManager : MonoBehaviour
 
     public void ResumeGame()
     {
+        PlayClip(resumeClip);
         Debug.Log("Resume Game");
         Time.timeScale = 1f;
         gamePause = false;
@@ -90,9 +132,11 @@ public class GameManager : MonoBehaviour
         CancelInvoke("Stopper");
         if(win)
         {
+            PlayClip(winClip);
             Debug.Log("You Win!!! Reload?");
         } else
         {
+            PlayClip(loseClip);
             Debug.Log("You Lose!!! Reload?");
         }
     }

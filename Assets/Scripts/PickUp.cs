@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
+    public AudioClip pickClip;
    
     public void Update()
     {
@@ -12,6 +13,7 @@ public class PickUp : MonoBehaviour
 
     public virtual void Picked()
     {
+        GameManager.instance.PlayClip(pickClip);
         Debug.Log("Podnios³em");
         Destroy(this.gameObject);
     }
